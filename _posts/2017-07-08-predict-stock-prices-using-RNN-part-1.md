@@ -227,9 +227,9 @@ with lstm_graph.as_default():
 
 {% highlight python linenos %}
     def _create_one_cell():
-        return tf.contrib.rnn.LSTMCell(config.lstm_size, state_is_tuple=True)
-        if config.keep_prob < 1.0:
-            return tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob=config.keep_prob)
+        lstm_cell = tf.contrib.rnn.LSTMCell(self.lstm_size, state_is_tuple=True)
+        lstm_cell = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob=self.keep_prob)
+        return lstm_cell	    
 {% endhighlight %}
 
 
@@ -331,7 +331,7 @@ The complete code is available [here](https://github.com/lilianweng/stock-rnn/bl
 
 ### Use TensorBoard
 
-Building the graph without visualization is like drawing in the dark, very obscure and error-prone. [Tensorboard](https://github.com/tensorflow/tensorboard) provides easy visualization of the graph structure and the learning process. Check out this [hand-on tutorial](https://youtu.be/eBbEDRsCmv4), only 20 min, but it is very practical and showcases several live demos.
+Building the graph without visualization is like drawing in the dark, very obscure and error-prone. [Tensorboard](https://github.com/tensorflow/tensorboard) provides easy visualization of the graph structure and the learning process. Check out this [hands-on tutorial](https://youtu.be/eBbEDRsCmv4), only 20 min, but it is very practical and showcases several live demos.
 
 **Brief Summary**
 - Use `with [tf.name_scope](https://www.tensorflow.org/api_docs/python/tf/name_scope)("your_awesome_module_name"):` to wrap elements working on the similar goal together.
